@@ -25,7 +25,7 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker push 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
       - echo Updating Kubernetes deployment...
-      -  sed -i "s|ubuntu_148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest|g" deploy.yml
+      -  sed -i "s|linux_148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest|g" deploy.yml
       - kubectl apply -f deployment.yml --validate=false
       - echo "Deployment successful!"
 
