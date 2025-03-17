@@ -22,7 +22,7 @@ phases:
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker push 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
+      - docker push 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthin_ecr:latest
       - echo Updating Kubernetes deployment...
       - sed -i "s|linux_148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthin_ecrt|g" deploy.yml
       - kubectl apply -f deployment.yml --validate=false
