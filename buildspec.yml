@@ -3,29 +3,28 @@ version: 0.2
 env:
   variables:
     AWS_REGION: ca-central-1
-    CLUSTER_NAME: charming-jazz-otter
-    ECR_REPOSITORY_URI: 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr
+    CLUSTER_NAME: ruthin-cluster
+    ECR_REPOSITORY_URI: 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthin_ecr
 
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 148761682921.dkr.ecr.ca-central-1.amazonaws.com
-      - echo Updating kubeconfig...
-      - aws eks --region ca-central-1 update-kubeconfig --name charming-jazz-otter
+      -aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 148761682921.dkr.ecr.ca-central-1.amazonaws.com
+      - aws eks --region ca-central-1 update-kubeconfig --name ruthin-cluster
 
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t ruthinecr .
-      - docker tag ruthinecr:latest 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
+      - docker build -t ruthin_ecr .
+      - docker tag ruthin_ecr:latest 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthin_ecr:latest
 
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
       - docker push 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
       - echo Updating Kubernetes deployment...
-      -  sed -i "s|linux_148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest|g" deploy.yml
+      - sed -i "s|linux_148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthin_ecrt|g" deploy.yml
       - kubectl apply -f deployment.yml --validate=false
       - echo "Deployment successful!"
 
