@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: my-ruthin-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-app
+      app: my-ruthin-app
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-ruthin-app
     spec:
       containers:
-        - name: my-app
-          image: 124355670627.dkr.ecr.us-east-1.amazonaws.com/mounikarepopvt:latest
+        - name: my-ruthin-app
+          image: 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
           ports:
             - containerPort: 3000
 
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: my-ruthin-service
 spec:
   type: LoadBalancer
   selector:
