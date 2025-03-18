@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-ruthin-app
-          image: 148761682921.dkr.ecr.ca-central-1.amazonaws.com/ruthinecr:latest
+          image: 148761682921.dkr.ecr.ca-central-1.amazonaws.com/3/18/ruthin:latest
           ports:
             - containerPort: 3000
 
